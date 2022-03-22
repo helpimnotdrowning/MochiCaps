@@ -12,6 +12,10 @@ public class Log {
         this.logger = LogManager.getLogger(name);
     }
 
+    public void print(String message) {
+        System.out.println(message);
+    }
+
     public void debug(String message) {
         logger.log(Level.DEBUG, message);
     }

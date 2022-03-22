@@ -1,7 +1,7 @@
 package io.github.helpimnotdrowning.mochicaps.apis;
 
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Interface to make adding support for posting to more social medias easier
@@ -9,9 +9,9 @@ import java.util.HashMap;
 public interface ISocialMediaAPI {
     /**
      * Login to bot account
-     * @param keys A {@code HashMap} that holds the keys/tokens/whatevers to the social media API
+     * @param keys A {@code Map} that holds the keys/tokens/whatevers to the social media API
      */
-    public void authenticate(HashMap<String, String> keys);
+    public void authenticate(Map<String, String> keys);
 
     /**
      * Create a media post containing pictures and/or videos. Media limit is dependent on the social media.

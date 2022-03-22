@@ -10,20 +10,25 @@ import java.util.Objects;
  * ~🌈~🌈 method calls 🌈~🌈~
  */
 public class EasyTime implements IBetterRepresentation {
-    private final float SECONDS;
+    private final float sec;
 
     public EasyTime(int hours, int minutes, int seconds, int ms) {
-        this.SECONDS = ((minutes + (hours * 60)) * 60) + seconds + (ms * .001f);
+        this.sec = ((minutes + (hours * 60)) * 60) + seconds + (ms * .001f);
     }
+
+    public EasyTime(float seconds) {
+        this.sec = seconds;
+    }
+
     public float getSeconds() {
-        return this.SECONDS;
+        return this.sec;
     }
 
     public String getTime() {
-        int hours = (int)Math.floor(this.SECONDS / 3600);
-        int minutes = (int)Math.floor((this.SECONDS % 3600) / 60);
-        int seconds = (int)Math.floor(this.SECONDS % 60);
-        int ms = (int)((this.SECONDS % 1) * 1000);
+        int hours = (int)Math.floor(this.sec / 3600);
+        int minutes = (int)Math.floor((this.sec % 3600) / 60);
+        int seconds = (int)Math.floor(this.sec % 60);
+        int ms = (int)((this.sec % 1) * 1000);
 
         return String.format("%s:%s:%s.%s", hours, minutes, seconds, ms);
     }

@@ -12,5 +12,6 @@ public class Main {
         LOGGER.error("Test");
         //System.out.println(secondsToTime(8025));
         EasyTime time = new EasyTime(1,2,3,4);
+        LOGGER.print(time.debugString());
     }
 }

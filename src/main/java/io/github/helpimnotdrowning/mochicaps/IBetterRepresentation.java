@@ -14,16 +14,16 @@ public interface IBetterRepresentation {
      * <br>
      * May return {@link #friendlyString()} when there isn't any more information to show.
      */
-    default public String infoString() {
+    public default String infoString() {
         return friendlyString();
-    };
+    }
 
     /**
      * String representation of object with the most possible information.
      * <br>
      * May return {@link #infoString()} when there isn't any more information to show.
      */
-    default public String debugString() {
+    public default String debugString() {
         return infoString();
-    };
+    }
 }
