@@ -4,11 +4,17 @@ import org.simpleyaml.configuration.file.YamlFile;
 
 import java.nio.file.Path;
 
-public class SeriesConfig {
+public class ConfigLoader {
+
+
+
+
+
+
     private final Path configPath;
     private final YamlFile yamlFile;
 
-    public SeriesConfig(Path configPath) {
+    public ConfigLoader(Path configPath) {
         this.configPath = configPath;
         this.yamlFile = new YamlFile(configPath.toString());
         loadConfig();

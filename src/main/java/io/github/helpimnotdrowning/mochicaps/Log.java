@@ -12,6 +12,10 @@ public class Log {
         this.logger = LogManager.getLogger(name);
     }
 
+    public Log(Class cls) {
+        this.logger = LogManager.getLogger(cls.getSimpleName());
+    }
+
     public void print(String message) {
         System.out.println(message);
     }

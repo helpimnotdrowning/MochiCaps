@@ -2,8 +2,8 @@ plugins {
     id 'java'
 }
 
-group 'io.github.helpimnotdrowning'
-version '1.0-SNAPSHOT'
+group "${project.group}"
+version "${project.mochicaps_version}"
 
 repositories {
     mavenCentral()
@@ -15,8 +15,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
-    implementation 'org.apache.logging.log4j:log4j-core:2.16.0'
-    implementation 'me.carleslc.Simple-YAML:Simple-Yaml:1.7.3'
+    implementation "org.apache.logging.log4j:log4j-core:${project.log4j_version}"
+    implementation "me.carleslc.Simple-YAML:Simple-Yaml:${project.simple_yaml_version}"
+    // replacing soon, no support for changing account bio
+    // related: https://github.com/redouane59/twittered/issues/370
+    implementation "io.github.redouane59.twitter:twittered:${project.twittered_version}"
 }
 
 test {

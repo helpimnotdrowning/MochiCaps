@@ -2,10 +2,10 @@ package io.github.helpimnotdrowning.mochicaps;
 
 
 public class Main {
-    private static final Log LOGGER = new Log("Main");
+    private static final Log LOGGER = new Log(Main.class);
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        LOGGER.print("Hello World!");
         LOGGER.debug("Among");
         LOGGER.info("Us");
         LOGGER.warn("In Real Life");
