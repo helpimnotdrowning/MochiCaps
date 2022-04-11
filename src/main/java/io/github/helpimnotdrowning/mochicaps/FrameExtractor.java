@@ -14,12 +14,14 @@ public class FrameExtractor {
      * @param args dont use wont do anything yet lol
      */
     public static void main(String[] args) {
-        Scanner stdin=new Scanner(System.in);
+        Scanner stdin = new Scanner(System.in);
+        EasyTime eTime;
 
         LOGGER.print("video path: ");
         Path path = Paths.get(stdin.nextLine());
         LOGGER.print("time (in seconds or as HH:MM:SS.ms) : ");
         String time = stdin.nextLine();
+
         if (time.matches("\\d\\d:\\d\\d:\\d\\d.\\d\\d")) {
             int hours = Integer.parseInt(time.charAt(0) + "" + time.charAt(1));
             int minutes = Integer.parseInt(time.charAt(3) + "" + time.charAt(4));
@@ -28,24 +30,22 @@ public class FrameExtractor {
 
             LOGGER.print(String.format("%s %s %s %s", hours, minutes, seconds, ms));
 
-            EasyTime etime = new EasyTime(hours, minutes, seconds, ms);
+            eTime = new EasyTime(hours, minutes, seconds, ms);
 
-            LOGGER.print(etime.debugString());
+            LOGGER.print(eTime.debugString());
 
-            getFrame(etime, path);
+            getFrame(eTime, path);
+
         } else {
             try {
-                float ftime = Float.parseFloat(time);
+                eTime = new EasyTime(Float.parseFloat(time));
+                getFrame(eTime, path);
             } catch (NumberFormatException e) {
                 //TODO: shutdown method to only shutdown the bot instance that called this method instead of everything
                 LOGGER.error(String.format("Time of %s couldn't be parsed as float or as \"HH:MM:SS.ms\"!", time));
                 e.printStackTrace();
                 System.exit(1);
             }
-
-            EasyTime etime = new EasyTime(Float.parseFloat(time));
-
-            getFrame(etime, path);
         }
     }
 
@@ -58,10 +58,11 @@ public class FrameExtractor {
         final Path tmpFileName = Paths.get("tmpFrameExtractor.png");
 
         try {
-            Process extractor = new ProcessBuilder("ffmpeg", "-y", "-loglevel", "warning", "-ss", sec.getTime(),
-                    "-i", path.toString(), "-vframes", "1", tmpFileName.toString()).start();
+            new ProcessBuilder("ffmpeg", "-y", "-loglevel", "warning", "-ss", sec.getTime(), "-i",
+                    path.toString(), "-vframes", "1", tmpFileName.toString()).start();
         } catch (IOException e) {
-            LOGGER.error(String.format("Couldn't extract frame at path %s and time %s!", path.toString(), sec.debugString()));
+            LOGGER.error(String.format("Couldn't extract frame at path %s and time %s!", path.toString(),
+                    sec.debugString()));
             e.printStackTrace();
             //TODO: shutdown method to only shutdown the bot instance that called this method instead of everything
             System.exit(1);

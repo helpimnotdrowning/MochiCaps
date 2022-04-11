@@ -23,7 +23,5 @@ public class MainConfig {
                 System.exit(1);
             }
         }
-
-
     }
 }
