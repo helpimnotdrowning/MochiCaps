@@ -7,7 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Utils {
+    private static final int UNCENSORED_LENGTH = 4;
+
     private static final Log LOGGER = new Log(Utils.class);
+
+    private Utils() {
+        LOGGER.error("this is a utils class stop trying to instantiate it!!!!");
+        System.exit(69);
+    }
 
     // https://stackoverflow.com/a/9375063
     /**
@@ -17,6 +24,24 @@ public class Utils {
      */
     public static String fixLineEndings(String DOSText) {
         return DOSText.replaceAll("\r\n", "\n");
+    }
+
+    /**
+     * Censor a String by keeping a few characters at the beginning and adding 3 *s (asterisks) to the end.
+     * @param message The message to be censored.
+     * @return The censored String.
+     */
+    public static String censor(String message) {
+        return message.substring(0, UNCENSORED_LENGTH) + "***";
+    }
+
+    /**
+     * Censor a String by keeping a few characters at the beginning and replacing the rest with *s (asterisks)
+     * @param message The message to be censored.
+     * @return The censored String.
+     */
+    public static String censorFull(String message) {
+        return message.substring(0, UNCENSORED_LENGTH) + '*' * (message.length() - UNCENSORED_LENGTH);
     }
 
     /**
@@ -75,6 +100,11 @@ public class Utils {
                 System.exit(1);
             }
         }
+    }
+
+    public static void safeShutdown(int code) {
+        LOGGER.info("this shutdown is not safe (yet)!!!");
+        System.exit(code);
     }
 
     /**

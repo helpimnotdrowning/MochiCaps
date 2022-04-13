@@ -1,29 +1,38 @@
 package io.github.helpimnotdrowning.mochicaps.apis;
 
 import io.github.helpimnotdrowning.mochicaps.IBetterRepresentation;
+import io.github.helpimnotdrowning.mochicaps.Log;
+import io.github.helpimnotdrowning.mochicaps.credentials.Credentials;
 import io.github.redouane59.twitter.TwitterClient;
 import io.github.redouane59.twitter.dto.tweet.TweetParameters;
 import io.github.redouane59.twitter.signature.TwitterCredentials;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Map;
+
+import static io.github.helpimnotdrowning.mochicaps.Utils.safeShutdown;
+import static io.github.helpimnotdrowning.mochicaps.credentials.CredentialFormat.TWITTER;
 
 public class TwitterAPI implements IBetterRepresentation, ISocialMediaAPI {
-    private final TwitterClient API;
+    private static final Log LOGGER = new Log(TwitterAPI.class);
+    private TwitterClient API;
 
     /**
      * Authenticate to the Twitter API.
-     * @param keys Map containing the keys consumerKey, consumerKeySecret, accessToken and accessTokenSecret,
+     * @param account Credentials in TWITTER format.
      */
-    public TwitterAPI(Map<String, String> keys) {
-        this.API = new TwitterClient(TwitterCredentials.builder()
-                .apiKey(keys.get("consumerKey"))
-                .apiSecretKey(keys.get("consumerKeySecret"))
-                .accessToken(keys.get("accessToken"))
-                .accessTokenSecret(keys.get("accessTokenSecret"))
-                .build());
+    public TwitterAPI(Credentials account) {
+        if (account.getFormat() == TWITTER) {
+            this.API = new TwitterClient(TwitterCredentials.builder()
+                    .apiKey(account.getConsumerKey())
+                    .apiSecretKey(account.getConsumerKeySecret())
+                    .accessToken(account.getAccessToken())
+                    .accessTokenSecret(account.getAccessTokenSecret())
+                    .build());
+        } else {
+            LOGGER.error(String.format("Could not login to Twitter: Credentials are in %s format!", account.getFormat()));
+            safeShutdown(1);
+        }
     }
 
     /**
@@ -52,7 +61,7 @@ public class TwitterAPI implements IBetterRepresentation, ISocialMediaAPI {
 
     @Override
     public void createPost(String message) {
-        createPost(message, null);
+        createPost(message, (Path)null);
 
     }
 
@@ -98,7 +107,9 @@ public class TwitterAPI implements IBetterRepresentation, ISocialMediaAPI {
     @Override
     public void changeBio(String bio) {
         //User.setDescription("d");
-        throw new ExecutionControl.NotImplementedException("Setting the user bio is not available yet in twittered!");
+        //throw new NotImplementedException("Setting the user bio is not available yet in twittered!");
+        LOGGER.error("Setting the user bio is not available yet within the twittered library!");
+        safeShutdown(1);
     }
 
     @Override
