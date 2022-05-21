@@ -21,8 +21,11 @@ dependencies {
     // replacing soon, no support for changing account bio
     // related: https://github.com/redouane59/twittered/issues/370
     implementation "io.github.redouane59.twitter:twittered:${project.twittered_version}"
+    //implementation "com.beust:jcommander:${project.jcommander_version}"
 }
 
 test {
     useJUnitPlatform()
 }
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17

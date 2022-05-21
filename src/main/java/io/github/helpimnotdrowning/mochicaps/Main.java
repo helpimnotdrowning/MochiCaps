@@ -1,36 +1,74 @@
 package io.github.helpimnotdrowning.mochicaps;
 
-import io.github.helpimnotdrowning.mochicaps.credentials.Credentials;
-
-import java.util.Map;
-
-import static io.github.helpimnotdrowning.mochicaps.credentials.CredentialFormat.TWITTER;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
-    private static final Log LOGGER = new Log(Main.class);
-
     public static void main(String[] args) {
-        LOGGER.print("Hello World!");
-        LOGGER.debug("Among");
-        LOGGER.info("Us");
-        LOGGER.warn("In Real Life");
-        LOGGER.error("Test");
+        parseArgs(args);
+    }
 
-        Map<String, String> credM = Map.of(
-                "accessToken",
-                "AT_aaaaaa",
-                "accessTokenSecret",
-                "ATS_AAAAAAA",
-                "consumerKey",
-                "CK_AAAAAaaaaaaAAAAAAAA",
-                "consumerKeySecret",
-                "CKS_aaaAaAAAAaa"
-        );
+    private static void parseArgs(String[] args) {
+        Log LOGGER = new Log("Main/parseArgs");
 
-        Credentials t = new Credentials(TWITTER, credM);
-        LOGGER.print(t.debugString());
-        LOGGER.print(new EasyTime(8025).debugString());
-        EasyTime time = new EasyTime(1,2,3,4);
-        LOGGER.print(time.debugString());
+        List<String> argsList = Arrays.asList(args);
+
+        LOGGER.print("CLI ARGS : " + Arrays.toString(args));
+
+        for (String arg : argsList) {
+            if (arg.equals("--help") || arg.equals("-H") /*|| true*/) {
+                LOGGER.print("""
+                        Unrecognized arguments are IGNORED.
+                            
+                        Usage:
+                          --help
+                          -H
+                              ...what do you think this does?
+                            
+                          --name=<bot name>
+                          -N=<bot name>
+                              [Required] Starts the named bot
+                            
+                          --tweet_now
+                              Tweets on bot start, requires CLI input
+                              "y" to confirm, anything else means no (start normally)
+                          
+                          --simulate
+                          -S
+                              Start in simulation mode (won't save state, delete/edit files,
+                                upload images, send posts, etc.)
+                              Will save attempted image uploads to disk
+                              
+                          --no-recover
+                          -N
+                              Do not use the recovery file for some reason
+                              The recovery file is written on a crash so the bot knows to skip ahead
+                                and not post repeat screencaps. Why you would want to disable this is
+                                is beyond me, but ¯\\_ (ツ)_/¯
+                         """);
+                System.exit(0);
+            }
+
+            if (arg.equals("--simulate") || arg.equals("-S")) {
+                Globals.setSimulationMode();
+            }
+
+            if (arg.startsWith("--name=") || arg.startsWith("-N=")) {
+                // split the arg on the "=" sign and take the last elements, which /should/ be the bot name
+                // if there's an = sign in your bot name that's on you
+                String[] botNameArg = arg.split("=");
+                String botName = botNameArg[botNameArg.length-1];
+
+                Globals.setBotName(botName);
+            }
+
+            if (arg.equals("--tweet_now")) {
+                Globals.doTweetOnStart();
+            }
+
+            if (arg.equals("--no-recover") || arg.equals("-N")) {
+                Globals.setDoNotRecover();
+            }
+        }
     }
 }
