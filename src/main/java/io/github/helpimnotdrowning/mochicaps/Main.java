@@ -1,5 +1,7 @@
 package io.github.helpimnotdrowning.mochicaps;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,11 +13,9 @@ public class Main {
     private static void parseArgs(String[] args) {
         Log LOGGER = new Log("Main/parseArgs");
 
-        List<String> argsList = Arrays.asList(args);
-
         LOGGER.print("CLI ARGS : " + Arrays.toString(args));
 
-        for (String arg : argsList) {
+        for (String arg : args) {
             if (arg.equals("--help") || arg.equals("-H") /*|| true*/) {
                 LOGGER.print("""
                         Unrecognized arguments are IGNORED.
@@ -63,12 +63,18 @@ public class Main {
             }
 
             if (arg.equals("--tweet_now")) {
-                Globals.doTweetOnStart();
+                Globals.setTweetOnStart();
             }
 
             if (arg.equals("--no-recover") || arg.equals("-N")) {
                 Globals.setDoNotRecover();
             }
+        }
+
+        try {
+            throw new IOException("dddd");
+        } catch (IOException ex) {
+            Utils.crash("Message", ex);
         }
     }
 }
