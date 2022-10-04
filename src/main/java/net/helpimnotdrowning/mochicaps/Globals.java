@@ -1,4 +1,4 @@
-package io.github.helpimnotdrowning.mochicaps;
+package net.helpimnotdrowning.mochicaps;
 
 /**
  * A class to hold global values that are going to be accessed from lots of places (I hope)

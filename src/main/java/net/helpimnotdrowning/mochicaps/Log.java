@@ -1,4 +1,4 @@
-package io.github.helpimnotdrowning.mochicaps;
+package net.helpimnotdrowning.mochicaps;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

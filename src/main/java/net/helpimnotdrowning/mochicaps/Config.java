@@ -1,4 +1,4 @@
-package io.github.helpimnotdrowning.mochicaps;
+package net.helpimnotdrowning.mochicaps;
 
 public class Config {
     private String botName = Globals.getBotName();

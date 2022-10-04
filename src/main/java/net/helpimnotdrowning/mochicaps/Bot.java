@@ -1,4 +1,4 @@
-package io.github.helpimnotdrowning.mochicaps;
+package net.helpimnotdrowning.mochicaps;
 
 public class Bot {
     public static void main(String[] args) throws RuntimeException{

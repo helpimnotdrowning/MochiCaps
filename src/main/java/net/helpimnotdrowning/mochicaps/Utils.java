@@ -1,4 +1,4 @@
-package io.github.helpimnotdrowning.mochicaps;
+package net.helpimnotdrowning.mochicaps;
 
 import java.io.IOException;
 import java.nio.file.Files;
