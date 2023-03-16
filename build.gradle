@@ -21,6 +21,8 @@ dependencies {
     // replacing soon, no support for changing account bio
     // related: https://github.com/redouane59/twittered/issues/370
     implementation "io.github.redouane59.twitter:twittered:${project.twittered_version}"
+    implementation "org.twitter4j:twitter4j-core:${project.twitter4j_version}"
+
     //implementation "com.beust:jcommander:${project.jcommander_version}"
 }
 
