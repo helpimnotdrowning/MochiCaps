@@ -63,10 +63,8 @@ public class Utils {
     public static String readFile(Path file) {
         try {
             return Files.readString(file);
-
         } catch (IOException ex) {
-            crash(String.format("The file '%s' couldn't be read", file), ex);
-            return "THIS TEXT SHOULD NEVER BE SEEN"; // need to return something, even if it never actually will
+            return crash(String.format("The file '%s' couldn't be read", file), ex);
         }
     }
 
@@ -94,10 +92,10 @@ public class Utils {
         if (Files.isDirectory(file)) {
             throw new IOException(String.format("The path '%s' will not be deleted because it is a directory, not a file!", file));
         }
-
+        
         Files.delete(file);
     }
-
+    
     /**
      * Create a file only if it doesn't already exist.
      * @param file The Path of the new file
@@ -125,7 +123,7 @@ public class Utils {
         // i love inconsistency!
         int hoursAsMinutes = hours * 60;
         minutes += hoursAsMinutes;
-
+        
         return (minutes * 60) + seconds + (ms * .001f);
     }
 
