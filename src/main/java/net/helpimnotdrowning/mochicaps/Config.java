@@ -1,7 +1,7 @@
 package net.helpimnotdrowning.mochicaps;
 
 public class Config {
-    private String botName = Globals.getBotName();
+    private final String botName = "CCCC";
 
     //pu
 }

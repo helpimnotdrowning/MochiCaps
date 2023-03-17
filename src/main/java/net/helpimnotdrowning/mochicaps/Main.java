@@ -51,15 +51,6 @@ public class Main {
                 Globals.setSimulationMode();
             }
 
-            if (arg.startsWith("--name=") || arg.startsWith("-N=")) {
-                // split the arg on the "=" sign and take the last elements, which /should/ be the bot name
-                // if there's an = sign in your bot name that's on you
-                String[] botNameArg = arg.split("=");
-                String botName = botNameArg[botNameArg.length-1];
-
-                Globals.setBotName(botName);
-            }
-
             if (arg.equals("--tweet_now")) {
                 Globals.setTweetOnStart();
             }
@@ -69,10 +60,6 @@ public class Main {
             }
         }
 
-        try {
-            throw new IOException("dddd");
-        } catch (IOException ex) {
-            Utils.crash("Message", ex);
-        }
+        Utils.crash("Message", new IOException("dddd"));
     }
 }

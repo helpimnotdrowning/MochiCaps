@@ -1,11 +1,7 @@
 package net.helpimnotdrowning.mochicaps;
 
-/**
- * A class to hold global values that are going to be accessed from lots of places (I hope)
- */
 public class Globals {
     private static boolean simulate;
-    private static String name;
     private static boolean tweetOnStart;
     private static boolean noRecover;
 
@@ -29,24 +25,6 @@ public class Globals {
     }
 
     /**
-     * Sets the target bot name.
-     * MochiCaps can hold many bot configs, so the specific bot name is needed to know what bot you wish to start.
-     * @param name Target bot name (to be launched)
-     */
-    public static void setBotName(String name) {
-        //TODO: check if named bot actually exists
-        Globals.name = name;
-    }
-
-    /**
-     * Get the target bot name (to be launched).
-     * @return The bot name
-     */
-    public static String getBotName() {
-        return name;
-    }
-
-    /**
      * Tells the bot if it should tweet upon starting.
      */
     public static void setTweetOnStart() {
@@ -62,9 +40,10 @@ public class Globals {
     }
 
     /**
-     * Tell the bot to ignore and remove a crashfile.
-     * The crashfile is created whenever the bot (you guessed it) crashes/exits unexpextedly so it can restart at the correct position and
-     * not repeat posts.
+     * TODO: REWORD COMMENT, THIS SEEMS CONFUSING!!!!
+     * Tell the bot to ignore and remove a crash flag.
+     * The crash flag is created whenever the bot crashes/exits crash flag, so it can restart at the correct position
+     * and avoid repeating posts.
 
      * This may NOT work when exiting via a keyboard interrupt (ctrl+c), quitting/closing the terminal window, or a
      * system/unexpected shutdown.
