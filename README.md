@@ -1,3 +1,5 @@
+# Twitter API is over :(, archived.
+
 # MochiCaps
 MochiCaps is a Twitter (and soon other social media too!) bot that is built to post anime screencaps/frames automatically, but will be able to do more (also soon!)
 
