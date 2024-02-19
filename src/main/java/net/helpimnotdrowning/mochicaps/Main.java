@@ -60,6 +60,14 @@ public class Main {
             }
         }
 
+        String ck ;
+        String cs ;
+        String at ;
+        String ats;
+
+
+        TwitterAPI(ck, cs, at, ats);
+
         Utils.crash("Message", new IOException("dddd"));
     }
 }
